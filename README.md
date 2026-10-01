@@ -1,37 +1,40 @@
 # Project Workflow Template
 
-A lightweight, stage-based workflow for building software one work item at a time.
-Two files drive everything:
+A lightweight, stage-based workflow for shipping one work item per branch.
 
-| File | Scope | When |
+## Core Files
+
+| File | Scope | Purpose |
 | --- | --- | --- |
-| `project.md` | Whole codebase | Filled once at project start (or scanned from an existing repo) |
-| `status.md` | One work item | Copied per branch; walks a Track — FULL (INIT → PLAN → IMPLEMENTATION → VERIFICATION) or LIGHT (INIT → IMPLEMENTATION → VERIFICATION) |
+| `docs/project.md` | Whole codebase | One-time project definition: target, architecture, roadmap, milestones |
+| `docs/status.md` | Single branch / work item | Day-to-day execution through INIT/PLAN/IMPLEMENTATION/VERIFICATION/DELIVERY |
 
-Works for any project type: web, desktop (Windows/macOS/Linux), mobile (Android/iOS), CLI, library, backend, or embedded.
-
----
-
-## Two flows
-
-### 1. Whole new project
-
-1. Create the project, then fill in `project.md`: Final Target, Architecture, Roadmap (give each roadmap item a one-line Definition of Done).
-2. `project.md` is read **once** to initialize; after that it is ignored during branch work and only revisited on `report` from `main`/`master`, or when you ask to modify it.
-
-### 2. Existing project (e.g. OpenBMC, Linux kernel)
-
-1. Copy the template in, then run `init` — it scans the codebase (languages, frameworks, structure, build files) and drafts the empty fields for your confirmation.
-2. Fill Final Target and Roadmap yourself (a scan can't invent those).
+Works for web, desktop, mobile, CLI, libraries, backend services, and embedded projects.
 
 ---
 
-## Is `project.md` defined?
+## Startup Modes
 
-`project.md` carries an **Init Status** marker (`TEMPLATE` or `DEFINED`), so the check is a one-liner:
+### New Project
+
+1. Fill `docs/project.md` (Final Target, Architecture, Roadmap, Milestones).
+2. Set `Status: DEFINED` only after content is reviewed and approved.
+
+### Existing Project
+
+1. Copy this template into the repo.
+2. Run `init` to scan languages/frameworks/layout and draft fields.
+3. Fill Final Target and Roadmap manually (the scan cannot infer business goals).
+
+---
+
+## Is Project Defined?
+
+Use `Init Status` in `project.md` (`TEMPLATE` or `DEFINED`):
 
 ```bash
 PROJECT_FILE="docs/project.md"
+[ -f "$PROJECT_FILE" ] || PROJECT_FILE=".workflow/project.md"
 [ -f "$PROJECT_FILE" ] || PROJECT_FILE="project.md"
 
 if [ -f "$PROJECT_FILE" ] && grep -q '^Status: DEFINED' "$PROJECT_FILE"; then
@@ -43,41 +46,44 @@ fi
 
 ---
 
-## Per work item (single branch)
+## Per-Branch Workflow
 
-1. Create a branch: `<type>/<short-name>` (type = `feature` / `fix` / `chore` / `docs`).
-2. Copy `status.md` into your workflow directory (`docs/` by default) and run `goto init` to reset it.
-3. Pick a **Track**: FULL for large/risky items (full PLAN pipeline), LIGHT for small/clear ones (skips PLAN).
-4. Progress through the stages with `goto next stage`.
-  - If `goto next stage` succeeds, the next stage starts immediately in the same turn.
-  - If Exit Criteria are not met, stage does not change and missing checklist items are listed.
-  - You can still use explicit `goto plan|implementation|verification` to move back for rework; these commands change stage only and do not auto-start work.
-5. Deliver: `open pr` (if your Delivery Policy requires a PR — always confirmed before opening; updates `project.md`, docs, and `README.md`, then commits before opening), then merge, then `finish`.
-
----
-
-## Stage command semantics
-
-- `goto next stage`: guarded transition. Requires current-stage Exit Criteria; auto-starts the entered stage.
-- `goto plan|implementation|verification`: explicit stage navigation (including rework moves). No Exit Criteria gate; no auto-start.
-- On manual stage navigation, record a one-line reason in `Next Action`.
-- Stage changes do not auto-check or auto-uncheck checklist items. Only `goto init` resets checklist state.
+1. Create branch: `<type>/<short-name>` (`feature|fix|chore|docs`).
+2. Prepare `docs/status.md`, then run `goto init`.
+3. Choose track:
+   - FULL: INIT -> PLAN -> IMPLEMENTATION -> VERIFICATION
+   - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
+4. Move forward with `goto next stage` (guarded by exit criteria).
+5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
+   - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
+   - Commit delivery updates.
+   - If main is protected: run `open pr` (one PR per branch; reuse existing PR).
+   - If main is not protected: push directly.
+   - Merge (if needed), then `finish`.
 
 ---
 
-## Where to put the files
+## Stage Command Semantics
 
-- Small/new project: `docs/`
-- Large existing repo (kernel, OpenBMC): a dedicated folder like `.workflow/` to avoid clashing with the project's own `docs/` or `Documentation/`. Add it to `.gitignore` if you don't intend to upstream it.
-
-On the FULL track, the PLAN stage's Spec and Tasks outputs land together in `<workflow-dir>/workitems/<name>.md` (usually `docs/workitems/<name>.md`). The LIGHT track skips it — status.md holds the whole trail.
+- `goto next stage`: guarded transition; auto-starts entered stage.
+- `goto plan|implementation|verification`: explicit navigation; no guard; no auto-start.
+- Manual stage change must record a one-line reason in `Next Action`.
+- Only `goto init` resets checklist items.
 
 ---
 
-## Using this repo
+## File Location
 
-This is a **template repository** — click **Use this template** (or copy `project.md` + `status.md`) into your project on a new branch.
-In this template repo, workflow files are at the repository root (`project.md`, `status.md`, `workitems/`).
-In a target project, place them under `docs/` (or `.workflow/` for very large existing repos).
-This README describes the template workflow itself. In a new project created from this template, the project README is expected to be rewritten to describe that project's product and milestones.
-See each file's own **Commands** and **AI Instructions** sections for the full command set.
+- Small/new projects: keep workflow files in `docs/`.
+- Large existing repos: use `.workflow/` to avoid conflicts.
+
+On FULL track, PLAN output goes to `<workflow-dir>/workitems/<name>.md`.
+
+---
+
+## Template Notes
+
+- This repository is a template; copy or use it as a starting point.
+- In target projects, keep canonical workflow files under `docs/` (or `.workflow/` for large repos).
+- This README describes workflow mechanics; target-project README should describe that project's product.
+- See `docs/project.md` and `docs/status.md` for complete command behavior and AI rules.

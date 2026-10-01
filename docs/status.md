@@ -188,16 +188,17 @@ During VERIFICATION, detect and run CI locally before delivery:
 
 > Not a stage. Runs once VERIFICATION is done.
 
-Flow (only if project.md Delivery Policy sets Pull Request Required = yes):
+Precondition: IMPLEMENTATION and VERIFICATION are already complete.
 
-1. `open pr` — show PR title/description and ask for explicit confirmation.
-2. After approval, update `project.md` progress (Roadmap row status and Milestones), relevant docs, and `README.md` for the delivered scope.
-3. Commit those updates, then push branch and open a PR to main.
-4. Wait for CI green + review approval.
-5. Merge the PR.
-6. `finish` — switch to main and delete the branch.
+Flow:
 
-If Pull Request Required = no, skip PR creation and perform step 2 and step 3 during `finish` before cleanup.
+1. Update delivery documents as needed: `project.md` progress (Roadmap/Milestones), related docs, and `README.md`.
+2. Commit the delivery updates.
+3. Apply branch policy:
+   - Main Branch Protected = yes: run `open pr` (confirm, then push and open/update PR to main). One PR per branch only.
+   - Main Branch Protected = no: skip `open pr`, push committed delivery updates directly.
+4. Merge/land per policy.
+5. `finish` — switch to main and delete the branch.
 
 ---
 
@@ -244,7 +245,9 @@ If Pull Request Required = no, skip PR creation and perform step 2 and step 3 du
 - [ ] project.md progress updated (Roadmap/Milestones)
 - [ ] Docs/README updated
 - [ ] Delivery commit created
+- [ ] Delivery updates pushed
 - [ ] PR opened (if required by Delivery Policy)
+- [ ] Single PR per branch respected (reuse existing PR if present)
 
 ---
 
@@ -278,7 +281,7 @@ Rules:
 8. Commit at meaningful checkpoints, not every stage: once at PLAN-agreed (FULL track) and once at IMPLEMENTATION-done. Do not create a commit per stage.
 9. Keep the Current Task section to 3-4 lines; put detail in `<workflow-dir>/workitems/<name>.md`.
 10. On `goto init`, reset this file to its init state: set Track to FULL, Current Stage to INIT, set Work Item Name/Description/Current Task/Next Action to TBD, and uncheck every checklist item.
-11. On `open pr`, always show the PR title and description and ask for explicit user confirmation; after approval, update `project.md`, docs, and `README.md`, commit those updates, then push and open the PR.
+11. On `open pr` (Main Branch Protected = yes), always show the PR title and description and ask for explicit user confirmation; ensure delivery document updates are done (`project.md`, docs, `README.md`), create a commit if needed, then push and open/update the branch PR. Enforce one PR per branch.
 12. On `report`, check the current branch first: on `main` or `master`, report from `project.md`; on any other branch, summarize progress from this file only (current stage + checklist) and do not read `project.md`.
 13. During VERIFICATION, if the project defines a formatter or linter, run it (auto-format/fix) before CI. Then detect a CI config and, if one exists, run CI locally and make it green before delivery (see "Local CI"). If none exists, run the project's build + test instead and note "no CI config". Do not defer CI failures to remote CI.
 14. On `goto next stage`, advance only when the current stage Exit Criteria are met. If not met, remain in the current stage and list the missing checklist items.
@@ -287,7 +290,7 @@ Rules:
 17. `goto plan`, `goto implementation`, and `goto verification` are explicit stage-navigation commands (including moving back for rework): they change Current Stage only and do not auto-start work.
 18. On `goto plan`, `goto implementation`, or `goto verification`, record a one-line reason in Next Action in the same turn (for traceability).
 19. Stage changes do not auto-check or auto-uncheck checklist items. Checklist items change only when explicitly completed/uncompleted by work updates; only `goto init` resets all checklist items.
-20. On `finish`, complete branch cleanup; if PR creation was skipped, first update `project.md` + docs + `README.md`, create a commit, then clean up.
+20. On `finish`, complete branch cleanup; if PR creation was skipped, ensure delivery document updates, a delivery commit, and push are complete first.
 
 ### Stage Transition Matrix
 
@@ -327,9 +330,9 @@ goto next stage   (advances along the current Track only when current-stage Exit
 
 run ci   (VERIFICATION: detect a CI config and run it locally until green; if none exists, run the project's build + test instead)
 
-open pr   (after VERIFICATION done: confirm PR title/description, then update `project.md` + docs + `README.md`, commit, push branch, and open a PR to main; requires CI green if project.md sets CI Required = yes)
+open pr   (after VERIFICATION done: for Main Branch Protected = yes, ensure delivery document updates + commit are complete, then confirm PR title/description, push branch, and open/update the branch PR to main; one PR per branch; requires CI green if project.md sets CI Required = yes)
 
-finish   (switch to main and delete the current branch; if PR is skipped, first update `project.md` + docs + `README.md` and commit)
+finish   (switch to main and delete the current branch; if PR is skipped, first ensure delivery document updates + commit + push are complete)
 
 ---
 
