@@ -208,7 +208,8 @@ Rules:
 10. During work branches, ignore this file; it is only revisited when the user asks to modify it.
 11. On `report`, check the current branch first: if branch is `main` or `master`, summarize progress from this file; otherwise do not use this file and report from `status.md`.
 12. Keep the project README aligned with the Final Target: on `init` write it toward the whole project's intended final state, and update it whenever a milestone finishes.
-13. On `finish` (after a work item is delivered), update this file's Roadmap and Milestones to reflect completed work before deleting the branch.
+13. On `open pr` (work-branch flow), update this file's Roadmap/Milestones and the relevant docs/README, then commit those updates before pushing and opening the PR.
+14. On `finish`, clean up the completed branch; if PR creation was skipped, perform the Roadmap/Milestone and docs/README updates with a commit first.
 
 ---
 
@@ -228,4 +229,4 @@ start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/
 
 report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 
-finish   (after a work item is delivered: update Roadmap/Milestones progress in this file, then clean up the completed branch)
+finish   (after a work item is delivered: clean up the completed branch; if PR was skipped, update Roadmap/Milestones + docs/README and commit before cleanup)

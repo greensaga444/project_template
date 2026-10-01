@@ -52,7 +52,7 @@ fi
   - If `goto next stage` succeeds, the next stage starts immediately in the same turn.
   - If Exit Criteria are not met, stage does not change and missing checklist items are listed.
   - You can still use explicit `goto plan|implementation|verification` to move back for rework; these commands change stage only and do not auto-start work.
-5. Deliver: `open pr` (if your Delivery Policy requires a PR — always confirmed before opening), then merge, then `finish`.
+5. Deliver: `open pr` (if your Delivery Policy requires a PR — always confirmed before opening; updates `project.md`, docs, and `README.md`, then commits before opening), then merge, then `finish`.
 
 ---
 
