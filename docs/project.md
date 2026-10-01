@@ -205,9 +205,10 @@ Rules:
 7. When a vertical slice pulls in adjacent work, record it in the roadmap immediately or defer it with an explicit stub; never leave silent overlap.
 8. Do not start a work item until it exists in the Roadmap.
 9. When starting a work item, hand off to `status.md` (per-task workflow) on a new branch.
-10. During work branches, ignore this file; it is only revisited when the user asks to modify it, or via `report` on main/master.
-11. Keep the project README aligned with the Final Target: on `init` write it toward the whole project's intended final state, and update it whenever a milestone finishes.
-12. On `finish` (after a work item is delivered), update this file's Roadmap and Milestones to reflect completed work before deleting the branch.
+10. During work branches, ignore this file; it is only revisited when the user asks to modify it.
+11. On `report`, check the current branch first: if branch is `main` or `master`, summarize progress from this file; otherwise do not use this file and report from `status.md`.
+12. Keep the project README aligned with the Final Target: on `init` write it toward the whole project's intended final state, and update it whenever a milestone finishes.
+13. On `finish` (after a work item is delivered), update this file's Roadmap and Milestones to reflect completed work before deleting the branch.
 
 ---
 
@@ -225,6 +226,6 @@ add roadmap item   (add a row with a one-line Definition of Done; check it doesn
 
 start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else FULL)
 
-report   (only on main/master: re-read this file and summarize roadmap progress)
+report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 
 finish   (after a work item is delivered: update Roadmap/Milestones progress in this file, then clean up the completed branch)

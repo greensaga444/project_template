@@ -271,7 +271,7 @@ Rules:
 9. Keep the Current Task section to 3-4 lines; put detail in `<workflow-dir>/workitems/<name>.md`.
 10. On `goto init`, reset this file to its init state: set Track to FULL, Current Stage to INIT, set Work Item Name/Description/Current Task/Next Action to TBD, and uncheck every checklist item.
 11. On `open pr`, always show the PR title and description and ask for explicit user confirmation; only open the PR after the user approves.
-12. On `report` while on a work branch, summarize progress from this file only (current stage + checklist); do not read `project.md`.
+12. On `report`, check the current branch first: on `main` or `master`, report from `project.md`; on any other branch, summarize progress from this file only (current stage + checklist) and do not read `project.md`.
 13. During VERIFICATION, if the project defines a formatter or linter, run it (auto-format/fix) before CI. Then detect a CI config and, if one exists, run CI locally and make it green before delivery (see "Local CI"). If none exists, run the project's build + test instead and note "no CI config". Do not defer CI failures to remote CI.
 14. On `goto next stage`, advance only when the current stage Exit Criteria are met. If not met, remain in the current stage and list the missing checklist items.
 15. If `goto next stage` advances successfully, immediately start the new stage's work in the same turn (do not wait for another user command).
@@ -303,7 +303,7 @@ Efficiency (keep credit/token spend low):
 
 ## Commands
 
-report   (on a work branch: summarize this work item's progress from status.md only; do not read project.md)
+report   (check branch first: on main/master, report from project.md; on other branches, summarize this work item's progress from status.md only)
 
 set track full | light   (choose the pipeline: FULL = PLAN + IMPLEMENTATION + VERIFICATION, LIGHT = IMPLEMENTATION + VERIFICATION only)
 
