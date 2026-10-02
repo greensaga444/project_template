@@ -195,8 +195,8 @@ Flow:
 1. Update delivery documents as needed: `project.md` progress (Roadmap/Milestones), related docs, and `README.md`.
 2. Commit the delivery updates.
 3. Apply branch policy:
-   - Main Branch Protected = yes: run `open pr` (confirm, then push and open/update PR to main). One PR per branch only.
-   - Main Branch Protected = no: skip `open pr`, push committed delivery updates directly.
+   - Main Branch Protected = yes (therefore Pull Request Required = yes): run `open pr` (confirm, then push and open/update PR to main). One PR per branch only.
+   - Main Branch Protected = no (therefore Pull Request Required = no): skip `open pr`, push the delivery commit directly to `main`.
 4. Merge/land per policy.
 5. `finish` — switch to main and delete the branch.
 

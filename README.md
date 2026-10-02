@@ -57,8 +57,9 @@ fi
 5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
    - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
    - Commit delivery updates.
-   - If main is protected: run `open pr` (one PR per branch; reuse existing PR).
-   - If main is not protected: push directly.
+   - Apply branch policy:
+     - If main is protected (therefore PR is required): run `open pr` (one PR per branch; reuse existing PR).
+     - If main is not protected (therefore PR is not required): push the delivery commit directly to `main`.
    - Merge (if needed), then `finish`.
 
 ---

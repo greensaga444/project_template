@@ -42,12 +42,12 @@ Tech Stack:
 > Decided once, after this file is defined. Governs how work branches land.
 
 - Main Branch Protected: TBD  (yes / no)
-- Pull Request Required: TBD  (yes / no — if main is protected, yes)
-- CI Required: TBD  (yes if Pull Request Required; must pass before merge)
+- Pull Request Required: same as Main Branch Protected
+- CI Required: same as Pull Request Required (must pass before merge)
 - Merge Method: TBD  (e.g. squash / merge / rebase)
 - One PR per Branch: yes  (if a PR already exists for the branch, update it)
 
-If Pull Request Required is **no** (local-only), work branches may merge directly and CI is optional.
+If Main Branch Protected is **no** (therefore Pull Request Required is **no**) (local-only), delivery may push directly to `main` and CI is optional.
 
 ---
 
@@ -211,8 +211,8 @@ Rules:
 12. Keep the project README aligned with the Final Target: on `init` write it toward the whole project's intended final state, and update it whenever a milestone finishes.
 13. Before Delivery, complete IMPLEMENTATION and VERIFICATION in `status.md`.
 14. Delivery is post-verification only: update Roadmap/Milestones and relevant docs/README, then commit.
-15. If Main Branch Protected = yes, open or update the branch PR (never create a second PR for the same branch).
-16. If Main Branch Protected = no, skip PR creation and push the delivery commit directly.
+15. If Main Branch Protected = yes (therefore Pull Request Required = yes), open or update the branch PR (never create a second PR for the same branch).
+16. If Main Branch Protected = no (therefore Pull Request Required = no), skip PR creation and push the delivery commit directly to `main`.
 17. On `finish`, clean up the completed branch; if PR was skipped, ensure delivery docs update + commit + push are complete first.
 
 ---
