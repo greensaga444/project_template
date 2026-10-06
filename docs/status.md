@@ -21,22 +21,20 @@ Description: TBD
 
 ## Track
 
-FULL
+LIGHT
 
 Tracks:
 
-- FULL — INIT → PLAN → IMPLEMENTATION → VERIFICATION. Use for large/risky items with real unknowns.
-- LIGHT — INIT → IMPLEMENTATION → VERIFICATION (skips the PLAN doc). Use for small, clear items.
+- LIGHT — INIT → IMPLEMENTATION → VERIFICATION (default).
+- FULL — INIT → PLAN → IMPLEMENTATION → VERIFICATION (use only when planning is needed).
 
-Choose LIGHT when scope and design are obvious; FULL when there are unknowns worth writing down.
+Simple rule: start with LIGHT. Switch to FULL only when requirements/design are unclear or risk is high.
 
-Quick Decision Rule (during INIT): choose FULL if any answer is yes:
+Optional check (only if unsure): use FULL when any of these is true:
 
-- Is there unresolved design uncertainty?
-- Is there migration risk (data/schema/external API)?
-- Does the item touch more than one major component?
-
-If all answers are no, choose LIGHT.
+- Unresolved design uncertainty
+- Migration risk (data/schema/external API)
+- More than one major component touched
 
 ---
 
@@ -215,40 +213,30 @@ Delivery done definition: delivery updates are committed and landed per policy (
 
 ## Current Checklist
 
-> On the LIGHT track, skip the PLAN section below.
+> On LIGHT, skip PLAN.
 
 ### INIT
 
 - [ ] Branch Created
 - [ ] Work Item Name + Description
-- [ ] Tech Stack Confirmed
-- [ ] Scope Boundary Agreed
-- [ ] Definition of Done + Overlap Checked
+- [ ] Scope + Definition of Done Confirmed
 
 ### PLAN
 
-- [ ] Business Goal
-- [ ] User Story
-- [ ] MVP Defined
-- [ ] Scope Defined
-- [ ] Acceptance Criteria
-- [ ] Core / Logic Tasks
-- [ ] UI / Interface Tasks
-- [ ] Data / Storage Tasks
-- [ ] Test Tasks
+- [ ] Goal + MVP Defined
+- [ ] Scope + Acceptance Criteria
+- [ ] Task Breakdown Ready
 
 ### IMPLEMENTATION
 
-- [ ] Data / Storage Changes
-- [ ] Core / Logic Changes
-- [ ] UI / Interface Changes
-- [ ] Unit Tests
+- [ ] Code Implemented
+- [ ] Tests Added/Updated
+- [ ] Changes Committed
 
 ### VERIFICATION
 
 - [ ] Work Item Tested
-- [ ] Spec Coverage Verified (on the LIGHT track, verify against the item's Definition of Done)
-- [ ] Verification evidence linked (test output, CI summary, and/or screenshots as applicable)
+- [ ] Definition of Done Verified
 - [ ] Format / Lint Checked (if the project defines a formatter or linter)
 - [ ] CI Passed — run locally if a CI config exists (required if project.md Delivery Policy sets CI Required = yes)
 
@@ -256,10 +244,8 @@ Delivery done definition: delivery updates are committed and landed per policy (
 
 - [ ] project.md progress updated (Roadmap/Milestones)
 - [ ] Docs/README updated
-- [ ] Delivery commit created
-- [ ] Delivery updates pushed
-- [ ] PR opened (if required by Delivery Policy)
-- [ ] Single PR per branch respected (reuse existing PR if present)
+- [ ] Delivery commit + push completed
+- [ ] PR opened/updated (if required)
 
 ---
 
@@ -283,36 +269,16 @@ Always read this file first.
 
 Rules:
 
-1. Follow the Current Stage and Track. On the LIGHT track, INIT hands off directly to IMPLEMENTATION — skip PLAN.
-2. Confirm the Track during INIT: FULL for items with unknowns, LIGHT for small/clear items. Use the Quick Decision Rule and record the track in the Track section.
-3. Do not jump to later stages unless the user explicitly issues a `goto <stage>` command.
-4. Prefer MVP solutions.
-5. Avoid over-engineering.
-6. Suggest architecture changes only when absolutely necessary.
-7. Focus on completing the current stage before moving forward.
-8. Commit at meaningful checkpoints, not every stage: once at PLAN-agreed (FULL track) and once at IMPLEMENTATION-done. Do not create a commit per stage.
-9. Keep the Current Task section to 3-4 lines; put detail in `<workflow-dir>/workitems/<name>.md`.
-10. On `goto init`, reset this file to its init state: set Track to FULL, Current Stage to INIT, set Work Item Name/Description/Current Task/Next Action to TBD, and uncheck every checklist item.
-11. On `open pr` (Main Branch Protected = yes), always show the PR title and description and ask for explicit user confirmation; ensure delivery document updates are done (`project.md`, docs, `README.md`), create a commit if needed, then push and open/update the branch PR. Enforce one PR per branch.
-12. On `report`, check the current branch first: on `main` or `master`, report from `project.md`; on any other branch, summarize progress from this file only (current stage + checklist) and do not read `project.md`.
-13. During VERIFICATION, if the project defines a formatter or linter, run it (auto-format/fix) before CI. Then detect a CI config and, if one exists, run CI locally and make it green before delivery (see "Local CI"). If none exists, run the project's build + test instead and note "no CI config". Capture at least one verification evidence artifact (test output, CI summary, and/or screenshots) and do not defer CI failures to remote CI.
-14. On `goto next stage`, advance only when the current stage Exit Criteria are met. If not met, remain in the current stage and list the missing checklist items.
-15. If `goto next stage` advances successfully, immediately start the new stage's work in the same turn (do not wait for another user command).
-16. For rule 15, "start the new stage's work" means all of the following in the same turn: update Current Stage, set Current Task, set Next Action, and perform at least one stage-allowed action.
-17. `goto plan`, `goto implementation`, and `goto verification` are explicit stage-navigation commands (including moving back for rework): they change Current Stage only and do not auto-start work.
-18. On `goto plan`, `goto implementation`, or `goto verification`, record a one-line reason in Next Action in the same turn (for traceability).
-19. Stage changes do not auto-check or auto-uncheck checklist items. Checklist items change only when explicitly completed/uncompleted by work updates; only `goto init` resets all checklist items.
-20. On `finish`, complete branch cleanup; if PR creation was skipped, ensure delivery document updates, a delivery commit, and push are complete first.
-
-### Stage Transition Matrix
-
-| Command | Allowed From | Allowed To | Exit Criteria Required | Auto-Start Work | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `goto init` | Any stage | INIT | No | No | Resets header fields to TBD and unchecks all checklist items |
-| `goto plan` | Any stage on FULL track | PLAN | No (explicit user command) | No | Must record one-line reason in Next Action |
-| `goto implementation` | Any stage | IMPLEMENTATION | No (explicit user command) | No | Must record one-line reason in Next Action |
-| `goto verification` | Any stage | VERIFICATION | No (explicit user command) | No | Must record one-line reason in Next Action |
-| `goto next stage` | Current stage only | Next stage on current track | Yes | Yes | If blocked, stay put and list missing checklist items |
+1. Follow Current Stage; default to LIGHT track.
+2. Use FULL only when planning is necessary (unknowns/risk).
+3. Prefer `goto next stage` as the normal progression command.
+4. Keep Current Task to 3-4 lines; put details in `<workflow-dir>/workitems/<name>.md`.
+5. On `goto init`, reset fields to TBD and uncheck checklist items.
+6. During VERIFICATION, run tests, format/lint (if defined), and local CI when a CI config exists.
+7. On `open pr` (when required), ensure delivery docs are updated before push/PR.
+8. On `report`, use `project.md` only on main/master; otherwise report from this file.
+9. If you need manual rework navigation, `goto plan|implementation|verification` is allowed; record a one-line reason in Next Action.
+10. On `finish`, complete branch cleanup only after delivery updates are landed.
 
 Efficiency (keep credit/token spend low):
 
@@ -328,15 +294,9 @@ Efficiency (keep credit/token spend low):
 
 report   (check branch first: on main/master, report from project.md; on other branches, summarize this work item's progress from status.md only)
 
-set track full | light   (choose the pipeline: FULL = PLAN + IMPLEMENTATION + VERIFICATION, LIGHT = IMPLEMENTATION + VERIFICATION only)
+set track full | light   (optional — default is LIGHT)
 
-goto init   (reset this file to init state: track=FULL, stage=INIT, header fields=TBD, all checkboxes unchecked)
-
-goto plan   (FULL track only; explicit stage navigation; changes Current Stage only and does not auto-start PLAN work; record one-line reason in Next Action)
-
-goto implementation   (explicit stage navigation; changes Current Stage only and does not auto-start IMPLEMENTATION work; record one-line reason in Next Action)
-
-goto verification   (explicit stage navigation; changes Current Stage only and does not auto-start VERIFICATION work; record one-line reason in Next Action)
+goto init   (reset this file to init state: track=LIGHT, stage=INIT, header fields=TBD, all checkboxes unchecked)
 
 goto next stage   (advances along the current Track only when current-stage Exit Criteria are met; otherwise stay in place and report missing checklist items; if advanced, immediately begin the new stage's work; on LIGHT, INIT → IMPLEMENTATION)
 
@@ -346,15 +306,19 @@ open pr   (after VERIFICATION done: for Main Branch Protected = yes, ensure deli
 
 finish   (switch to main and delete the current branch; if PR is skipped, first ensure delivery document updates + commit + push are complete)
 
+Advanced (optional):
+
+goto plan | goto implementation | goto verification   (manual stage navigation for rework; record one-line reason in Next Action)
+
 ---
 
 ## Command Examples
 
-1. `goto next stage` from PLAN, with PLAN Exit Criteria met
-   Result: Current Stage becomes IMPLEMENTATION, Current Task and Next Action are updated, and at least one implementation action is performed in the same turn.
+1. `goto next stage` from INIT on LIGHT
+   Result: moves to IMPLEMENTATION.
 
-2. `goto next stage` from PLAN, with missing PLAN checklist items
-   Result: Current Stage stays PLAN, and the missing checklist items are listed.
+2. `goto next stage` from PLAN on FULL, with missing PLAN checks
+   Result: stays on PLAN and lists missing checklist items.
 
-3. `goto implementation` from VERIFICATION to fix a bug
-   Result: Current Stage becomes IMPLEMENTATION only (no auto-start), and Next Action records the one-line reason for moving back.
+3. `goto verification` from IMPLEMENTATION (manual re-check)
+   Result: stage changes to VERIFICATION; Next Action records the reason.
