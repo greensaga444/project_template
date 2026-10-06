@@ -11,6 +11,13 @@ A lightweight, stage-based workflow for shipping one work item per branch.
 
 Works for web, desktop, mobile, CLI, libraries, backend services, and embedded projects.
 
+## Optional Documentation Packs
+
+| Path | Purpose |
+| --- | --- |
+| `docs/prd/` | Product requirements source files (single or multi-file PRDs) |
+| `docs/style/` | Two-layer coding style system (baseline + language appendices) |
+
 ---
 
 ## Startup Modes
@@ -30,7 +37,7 @@ Works for web, desktop, mobile, CLI, libraries, backend services, and embedded p
 
 ## Is Project Defined?
 
-Use `Init Status` in `project.md` (`TEMPLATE` or `DEFINED`):
+Use `Init Status` in the resolved project file (`TEMPLATE` or `DEFINED`):
 
 ```bash
 PROJECT_FILE="docs/project.md"
@@ -44,7 +51,7 @@ else
 fi
 ```
 
-Branch-work prerequisite: before starting any work-item branch flow, `docs/project.md` must be `Status: DEFINED`.
+Branch-work prerequisite: before starting any work-item branch flow, the resolved project file (`docs/project.md`, `.workflow/project.md`, or root `project.md`) must be `Status: DEFINED`.
 If status is `TEMPLATE`, run `init` and complete project definition first.
 
 ---
@@ -56,7 +63,7 @@ If status is `TEMPLATE`, run `init` and complete project definition first.
 3. Choose track:
    - FULL: INIT -> PLAN -> IMPLEMENTATION -> VERIFICATION
    - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
-  - Quick rule: choose FULL if any of these are true: unresolved design unknowns, migration/external API risk, or multi-component changes; otherwise choose LIGHT.
+   - Quick rule: choose FULL if any of these are true: unresolved design unknowns, migration/external API risk, or multi-component changes; otherwise choose LIGHT.
 4. Move forward with `goto next stage` (guarded by exit criteria).
 5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
    - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
@@ -146,5 +153,7 @@ On FULL track, PLAN output goes to `<workflow-dir>/workitems/<name>.md`.
 
 - This repository is a template; copy or use it as a starting point.
 - In target projects, keep canonical workflow files under `docs/` (or `.workflow/` for large repos).
+- Keep product requirements in `docs/prd/` (indexed by `docs/prd/00-index.md`).
+- Keep coding standards in `docs/style/` (Layer 1 baseline + Layer 2 language appendices).
 - This README describes workflow mechanics; target-project README should describe that project's product.
 - See `docs/project.md` and `docs/status.md` for complete command behavior and AI rules.

@@ -2,12 +2,12 @@
 
 > Use this file for a **single work item** (feature, fix, chore, docs) on its own branch.
 > Place it in your workflow directory (`<workflow-dir>/status.md`, usually `docs/status.md`), fill in the Current Work Item, reset the checklist to unchecked, and start at the INIT stage.
-> For whole-codebase architecture, target, and roadmap, see `project.md`.
+> For whole-codebase architecture, target, and roadmap, see the resolved project file (prefer `docs/project.md`; use `.workflow/project.md` for large repos; root `project.md` is a legacy fallback).
 
 ## Project
 
-See `project.md` for Project Name, Repository, and Tech Stack.
-(For a standalone task with no `project.md`, fill those in here instead.)
+See the resolved project file for Project Name, Repository, and Tech Stack.
+(For a standalone task with no resolved project file, fill those in here instead.)
 
 ---
 

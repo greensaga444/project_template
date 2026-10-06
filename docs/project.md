@@ -75,6 +75,8 @@ README.md
 docs/
   project.md
   status.md
+  prd/
+  style/
   workitems/<name>.md
 ```
 
@@ -84,6 +86,8 @@ Recommended layout inside a target project:
 docs/
   project.md            (this file — whole-project overview, read once)
   status.md             (per-task workflow, one copy per branch)
+  prd/                  (product requirements source files)
+  style/                (coding style baseline + language appendices)
   workitems/<name>.md   (FULL track: PLAN output — Spec + Tasks — in one file)
 <source>/               (application/source code)
 ```
