@@ -148,6 +148,7 @@ Constraints / Non-Functional Requirements:
 > - Define each item by a distinct, user-visible outcome, captured in its one-line Definition of Done.
 > - Before starting an item, check overlap: if an earlier item already forces this work, fold them together or keep the earlier one deliberately minimal.
 > - If two rows share Definition-of-Done language, merge or re-scope them.
+> - Whenever any roadmap row is added or edited, re-run the overlap check and merge/re-scope duplicates immediately.
 > - For vertical slices, mark any pulled-in work in the roadmap immediately, or defer it with an explicit stub — never leave silent overlap.
 
 | # | Work Item | Definition of Done | Priority | Track | Depends On | Status |
@@ -203,8 +204,8 @@ Rules:
 4. Suggest architecture changes only when absolutely necessary; record them under Key Decisions.
 5. Give every roadmap item a one-line Definition of Done describing a distinct, user-visible outcome; no two items should share it.
 6. Before starting a work item, run an overlap check against earlier/related items — if an earlier item already forces this work, fold them together or keep the earlier one deliberately minimal instead of duplicating.
-7. When a vertical slice pulls in adjacent work, record it in the roadmap immediately or defer it with an explicit stub; never leave silent overlap.
-8. Do not start a work item until it exists in the Roadmap.
+7. When a vertical slice pulls in adjacent work, record it in the roadmap immediately or defer it with an explicit stub; never leave silent overlap. Re-run overlap checks whenever a roadmap row is added or edited.
+8. Do not start a work item until it exists in the Roadmap and `Init Status` is `DEFINED`.
 9. When starting a work item, hand off to `status.md` (per-task workflow) on a new branch.
 10. During work branches, ignore this file; it is only revisited when the user asks to modify it.
 11. On `report`, check the current branch first: if branch is `main` or `master`, summarize progress from this file; otherwise do not use this file and report from `status.md`.

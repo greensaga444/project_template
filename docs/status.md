@@ -30,6 +30,14 @@ Tracks:
 
 Choose LIGHT when scope and design are obvious; FULL when there are unknowns worth writing down.
 
+Quick Decision Rule (during INIT): choose FULL if any answer is yes:
+
+- Is there unresolved design uncertainty?
+- Is there migration risk (data/schema/external API)?
+- Does the item touch more than one major component?
+
+If all answers are no, choose LIGHT.
+
 ---
 
 ## Current Stage
@@ -78,6 +86,7 @@ Exit Criteria:
 - Tech Stack confirmed
 - Scope boundary agreed
 - Definition of Done confirmed and overlap with earlier items checked
+- If `project.md` exists, `Init Status` is `DEFINED` (do not proceed while `TEMPLATE`)
 
 ---
 
@@ -89,7 +98,7 @@ Define requirements/MVP and break them into implementable tasks.  (FULL track on
 
 Output:
 
-<workflow-dir>/workitems/<name>.md — "Spec" and "Tasks" sections (`<workflow-dir>` is usually `docs/`; in this template repo it is the repository root)
+<workflow-dir>/workitems/<name>.md — "Spec" and "Tasks" sections (`<workflow-dir>` is usually `docs/`; in this template repo it is also `docs/`)
 
 Allowed:
 
@@ -200,6 +209,8 @@ Flow:
 4. Merge/land per policy.
 5. `finish` — switch to main and delete the branch.
 
+Delivery done definition: delivery updates are committed and landed per policy (merged or pushed to `main`), roadmap/milestones are updated, and branch cleanup is complete.
+
 ---
 
 ## Current Checklist
@@ -237,6 +248,7 @@ Flow:
 
 - [ ] Work Item Tested
 - [ ] Spec Coverage Verified (on the LIGHT track, verify against the item's Definition of Done)
+- [ ] Verification evidence linked (test output, CI summary, and/or screenshots as applicable)
 - [ ] Format / Lint Checked (if the project defines a formatter or linter)
 - [ ] CI Passed — run locally if a CI config exists (required if project.md Delivery Policy sets CI Required = yes)
 
@@ -255,7 +267,7 @@ Flow:
 
 TBD
 
-> Keep this to 3-4 lines. Detail belongs in `<workflow-dir>/workitems/<name>.md` (`docs/` in target projects; root in this template repo), not here.
+> Keep this to 3-4 lines. Detail belongs in `<workflow-dir>/workitems/<name>.md` (`docs/` in target projects and this template repo), not here.
 
 ---
 
@@ -272,7 +284,7 @@ Always read this file first.
 Rules:
 
 1. Follow the Current Stage and Track. On the LIGHT track, INIT hands off directly to IMPLEMENTATION — skip PLAN.
-2. Confirm the Track during INIT: FULL for items with unknowns, LIGHT for small/clear items. Record it in the Track section.
+2. Confirm the Track during INIT: FULL for items with unknowns, LIGHT for small/clear items. Use the Quick Decision Rule and record the track in the Track section.
 3. Do not jump to later stages unless the user explicitly issues a `goto <stage>` command.
 4. Prefer MVP solutions.
 5. Avoid over-engineering.
@@ -283,7 +295,7 @@ Rules:
 10. On `goto init`, reset this file to its init state: set Track to FULL, Current Stage to INIT, set Work Item Name/Description/Current Task/Next Action to TBD, and uncheck every checklist item.
 11. On `open pr` (Main Branch Protected = yes), always show the PR title and description and ask for explicit user confirmation; ensure delivery document updates are done (`project.md`, docs, `README.md`), create a commit if needed, then push and open/update the branch PR. Enforce one PR per branch.
 12. On `report`, check the current branch first: on `main` or `master`, report from `project.md`; on any other branch, summarize progress from this file only (current stage + checklist) and do not read `project.md`.
-13. During VERIFICATION, if the project defines a formatter or linter, run it (auto-format/fix) before CI. Then detect a CI config and, if one exists, run CI locally and make it green before delivery (see "Local CI"). If none exists, run the project's build + test instead and note "no CI config". Do not defer CI failures to remote CI.
+13. During VERIFICATION, if the project defines a formatter or linter, run it (auto-format/fix) before CI. Then detect a CI config and, if one exists, run CI locally and make it green before delivery (see "Local CI"). If none exists, run the project's build + test instead and note "no CI config". Capture at least one verification evidence artifact (test output, CI summary, and/or screenshots) and do not defer CI failures to remote CI.
 14. On `goto next stage`, advance only when the current stage Exit Criteria are met. If not met, remain in the current stage and list the missing checklist items.
 15. If `goto next stage` advances successfully, immediately start the new stage's work in the same turn (do not wait for another user command).
 16. For rule 15, "start the new stage's work" means all of the following in the same turn: update Current Stage, set Current Task, set Next Action, and perform at least one stage-allowed action.

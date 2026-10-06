@@ -44,6 +44,9 @@ else
 fi
 ```
 
+Branch-work prerequisite: before starting any work-item branch flow, `docs/project.md` must be `Status: DEFINED`.
+If status is `TEMPLATE`, run `init` and complete project definition first.
+
 ---
 
 ## Per-Branch Workflow
@@ -53,6 +56,7 @@ fi
 3. Choose track:
    - FULL: INIT -> PLAN -> IMPLEMENTATION -> VERIFICATION
    - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
+  - Quick rule: choose FULL if any of these are true: unresolved design unknowns, migration/external API risk, or multi-component changes; otherwise choose LIGHT.
 4. Move forward with `goto next stage` (guarded by exit criteria).
 5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
    - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
@@ -61,6 +65,62 @@ fi
      - If main is protected (therefore PR is required): run `open pr` (one PR per branch; reuse existing PR).
      - If main is not protected (therefore PR is not required): push the delivery commit directly to `main`.
    - Merge (if needed), then `finish`.
+
+---
+
+## One-Page Flow Cheat Sheet
+
+### 0) Initialize Once (main/master)
+
+1. Fill `docs/project.md`.
+2. Confirm Final Target, Architecture, Roadmap, Milestones.
+3. Set `Status: DEFINED`.
+
+Gate: do not start branch work while status is `TEMPLATE`.
+
+### 1) Start One Work Item (new branch)
+
+1. Create branch: `<type>/<short-name>`.
+2. Open `docs/status.md`.
+3. Run `goto init`.
+4. Fill Work Item Name + Description.
+5. Confirm Definition of Done and overlap check.
+
+### 2) Pick Track During INIT
+
+Choose FULL if any answer is yes:
+
+1. Unresolved design uncertainty?
+2. Migration/external API risk?
+3. More than one major component touched?
+
+If all are no, choose LIGHT.
+
+### 3) Execute Stages
+
+| Track | Stage Path |
+| --- | --- |
+| FULL | INIT -> PLAN -> IMPLEMENTATION -> VERIFICATION |
+| LIGHT | INIT -> IMPLEMENTATION -> VERIFICATION |
+
+Use `goto next stage` for guarded progression.
+Use `goto plan|implementation|verification` only for explicit navigation/rework (must record reason in Next Action).
+
+### 4) Verification Must-Haves
+
+1. Tests pass.
+2. Format/lint clean (if defined).
+3. Local CI green when CI config exists; otherwise run project build + test.
+4. Add verification evidence (test output, CI summary, and/or screenshots).
+
+### 5) Delivery (after verification only)
+
+1. Update docs: roadmap/milestones + README/related docs.
+2. Commit delivery updates.
+3. Land by policy: protected main uses `open pr` (one PR per branch); unprotected main pushes directly to `main`.
+4. Run `finish` for branch cleanup.
+
+Done definition: updates landed per policy, docs updated, branch cleaned.
 
 ---
 
