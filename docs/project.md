@@ -230,7 +230,7 @@ show roadmap
 
 add roadmap item   (add a row with a one-line Definition of Done; check it doesn't overlap an existing item)
 
-start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else FULL)
+start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else LIGHT)
 
 report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 

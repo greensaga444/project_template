@@ -219,6 +219,7 @@ Delivery done definition: delivery updates are committed and landed per policy (
 
 - [ ] Branch Created
 - [ ] Work Item Name + Description
+- [ ] Tech Stack Confirmed
 - [ ] Scope + Definition of Done Confirmed
 
 ### PLAN
@@ -277,7 +278,7 @@ Rules:
 6. During VERIFICATION, run tests, format/lint (if defined), and local CI when a CI config exists.
 7. On `open pr` (when required), ensure delivery docs are updated before push/PR.
 8. On `report`, use `project.md` only on main/master; otherwise report from this file.
-9. If you need manual rework navigation, `goto plan|implementation|verification` is allowed; record a one-line reason in Next Action.
+9. If you need manual rework navigation, `goto plan|implementation|verification` is allowed; record a one-line reason in Next Action. These specific-stage commands change stage only (no auto-start).
 10. On `finish`, complete branch cleanup only after delivery updates are landed.
 
 Efficiency (keep credit/token spend low):
@@ -308,7 +309,7 @@ finish   (switch to main and delete the current branch; if PR is skipped, first 
 
 Advanced (optional):
 
-goto plan | goto implementation | goto verification   (manual stage navigation for rework; record one-line reason in Next Action)
+goto plan | goto implementation | goto verification   (manual stage navigation for rework; no auto-start; record one-line reason in Next Action)
 
 ---
 
