@@ -148,7 +148,6 @@ Not Allowed:
 Exit Criteria:
 
 - All tasks completed
-- Code committed
 - Tests added
 
 ---
@@ -200,7 +199,7 @@ Precondition: IMPLEMENTATION and VERIFICATION are already complete.
 Flow:
 
 1. Update delivery documents as needed: `project.md` progress (Roadmap/Milestones), related docs, and `README.md`.
-2. Commit the delivery updates.
+2. Commit implementation changes and delivery updates together.
 3. Apply branch policy:
    - Main Branch Protected = yes (therefore Pull Request Required = yes): run `open pr` (confirm, then push and open/update PR to main). One PR per branch only.
    - Main Branch Protected = no (therefore Pull Request Required = no): skip `open pr`, push the delivery commit directly to `main`.
@@ -232,7 +231,6 @@ Delivery done definition: delivery updates are committed and landed per policy (
 
 - [ ] Code Implemented
 - [ ] Tests Added/Updated
-- [ ] Changes Committed
 
 ### VERIFICATION
 
