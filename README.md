@@ -65,6 +65,7 @@ If status is `TEMPLATE`, run `init` and complete project definition first.
    - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
    - Quick rule: choose FULL if any of these are true: unresolved design unknowns, migration/external API risk, or multi-component changes; otherwise choose LIGHT.
 4. Move forward with `goto next stage` (guarded by exit criteria).
+  - Optional non-interactive mode: `run auto` to execute all remaining stages and delivery in one pass.
 5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
    - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
    - Commit delivery updates.
@@ -112,6 +113,7 @@ If all are no, choose LIGHT.
 
 Use `goto next stage` for guarded progression.
 Use `goto plan|implementation|verification` only for explicit navigation/rework (must record reason in Next Action).
+Use `run auto` when you want unattended execution from the current stage through delivery.
 
 ### 4) Verification Must-Haves
 

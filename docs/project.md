@@ -221,6 +221,7 @@ Rules:
 15. If Main Branch Protected = yes (therefore Pull Request Required = yes), open or update the branch PR (never create a second PR for the same branch).
 16. If Main Branch Protected = no (therefore Pull Request Required = no), skip PR creation and push the delivery commit directly to `main`.
 17. On `finish`, clean up the completed branch; if PR was skipped, ensure delivery docs update + commit + push are complete first.
+18. On `run auto`, execute branch flow non-interactively from the current stage in `status.md` through delivery and landing to `main` by policy (merge via PR when required, direct push when not required), then run cleanup.
 
 ---
 
@@ -237,6 +238,8 @@ show roadmap
 add roadmap item   (add a row with a one-line Definition of Done; check it doesn't overlap an existing item)
 
 start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else LIGHT)
+
+run auto   (non-interactive full work-item runner after `start`: drive remaining stages in `status.md`, run verification gates, perform delivery, land changes to `main` by policy, then execute `finish` cleanup)
 
 report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 

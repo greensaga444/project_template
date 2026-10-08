@@ -278,6 +278,7 @@ Rules:
 8. On `report`, use `project.md` only on main/master; otherwise report from this file.
 9. If you need manual rework navigation, `goto plan|implementation|verification` is allowed; record a one-line reason in Next Action. These specific-stage commands change stage only (no auto-start).
 10. On `finish`, complete branch cleanup only after delivery updates are landed.
+11. On `run auto`, do not ask follow-up questions: use deterministic defaults, execute all remaining stages and delivery, and stop only on hard blockers with a concise failure report.
 
 Efficiency (keep credit/token spend low):
 
@@ -301,6 +302,8 @@ goto next stage   (advances along the current Track only when current-stage Exit
 
 run ci   (VERIFICATION: detect a CI config and run it locally until green; if none exists, run the project's build + test instead)
 
+run auto   (non-interactive end-to-end runner for the current branch: execute all remaining stages from the current stage through DELIVERY using defaults, run tests/format/lint/local CI as required, update delivery docs, commit, push, and open/update PR only when required by policy; stop on first blocker and report exact failure + next manual action)
+
 open pr   (after VERIFICATION done: for Main Branch Protected = yes, ensure delivery document updates + commit are complete, then confirm PR title/description, push branch, and open/update the branch PR to main; one PR per branch; requires CI green if project.md sets CI Required = yes)
 
 finish   (switch to main and delete the current branch; if PR is skipped, first ensure delivery document updates + commit + push are complete)
@@ -318,6 +321,9 @@ goto plan | goto implementation | goto verification   (manual stage navigation f
 
 2. `goto next stage` from PLAN on FULL, with missing PLAN checks
    Result: stays on PLAN and lists missing checklist items.
+
+3. `run auto` from any non-final stage
+   Result: runs the remaining pipeline without prompts and either lands the item or stops with a blocker report.
 
 3. `goto verification` from IMPLEMENTATION (manual re-check)
    Result: stage changes to VERIFICATION; Next Action records the reason.
