@@ -92,6 +92,8 @@ docs/
 <source>/               (application/source code)
 ```
 
+Build output convention: write all generated build artifacts to `build/`.
+
 ---
 
 ## Final Target
