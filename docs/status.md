@@ -4,6 +4,13 @@
 > Place it in your workflow directory (`<workflow-dir>/status.md`, usually `docs/status.md`), fill in the Current Work Item, reset the checklist to unchecked, and start at the INIT stage.
 > For whole-codebase architecture, target, and roadmap, see the resolved project file (prefer `docs/project.md`; use `.workflow/project.md` for large repos; root `project.md` is a legacy fallback).
 
+## Quick Use
+
+1. Fill Current Work Item and keep Track = LIGHT by default.
+2. Advance with `goto next stage` and satisfy each stage Exit Criteria.
+3. Use the test documents during IMPLEMENTATION and run tests/format/lint/CI in VERIFICATION.
+4. Never commit `status.md`; reset it locally after delivery.
+
 ## Project
 
 See the resolved project file for Project Name, Repository, and Tech Stack.
@@ -295,6 +302,50 @@ Efficiency (keep credit/token spend low):
 
 ## Commands
 
+### Per-Item Execution Flow (Exact Order)
+
+Use this sequence for each work item.
+
+1. INIT setup
+   - Fill `Current Work Item` (name + description).
+   - Keep `Track` = LIGHT unless FULL is required by risk/unknowns.
+   - Confirm scope line and one-line Definition of Done.
+
+2. Move to IMPLEMENTATION
+   - Run: `goto next stage`
+   - LIGHT path: INIT -> IMPLEMENTATION
+   - FULL path: INIT -> PLAN -> IMPLEMENTATION (use `goto next stage` at each gate)
+
+3. IMPLEMENTATION with test-first (where test md files are used)
+   - Use `docs/workitems/test-case-template.md` to define one criterion's behavior contract and scenarios.
+   - Use `docs/workitems/tdd-test-first-checklist.md` to run Red -> Green -> Refactor.
+   - If splitting responsibility across models, apply `docs/workitems/two-model-test-impl-flow.md`.
+   - Run tests in this exact intent order:
+     1) Run new tests and confirm expected failure (Red).
+     2) Implement minimum code.
+     3) Re-run tests until passing (Green).
+     4) Refactor safely and re-run related suite.
+
+4. Move to VERIFICATION
+   - Run: `goto next stage`
+   - Execute project checks:
+     - tests
+     - formatter/linter (if defined)
+     - local CI if CI config exists (`run ci`)
+
+5. DELIVERY
+   - Update delivery docs (`project.md` roadmap/milestones, related docs, `README.md` as needed).
+   - Commit and push all delivery changes except `status.md`.
+   - If policy requires PR, run `open pr`.
+   - Run `finish` only after delivery is landed.
+
+6. Reset for next item
+   - Run `goto init`.
+   - Keep `status.md` local and uncommitted.
+
+Note for this template repository:
+- If no runnable code/tests exist yet, this flow is process-valid but runtime commands execute only after scaffolding in a target project.
+
 report   (check branch first: on main/master, report from project.md; on other branches, summarize this work item's progress from status.md only)
 
 set track full | light   (optional — default is LIGHT)
@@ -328,5 +379,5 @@ goto plan | goto implementation | goto verification   (manual stage navigation f
 3. `run auto` from any non-final stage
    Result: runs the remaining pipeline without prompts and either lands the item or stops with a blocker report.
 
-3. `goto verification` from IMPLEMENTATION (manual re-check)
+4. `goto verification` from IMPLEMENTATION (manual re-check)
    Result: stage changes to VERIFICATION; Next Action records the reason.

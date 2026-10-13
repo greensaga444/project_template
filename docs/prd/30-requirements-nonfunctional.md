@@ -1,5 +1,11 @@
 # Non-Functional Requirements
 
+## Writing Rules
+
+- Define measurable targets (latency, uptime, error budget, or equivalent).
+- Ensure each NFR has a concrete validation method.
+- Keep target values realistic for the planned milestone.
+
 ## Quality Attributes
 
 | ID | Attribute | Requirement | Target | Validation |

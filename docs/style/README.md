@@ -2,6 +2,12 @@
 
 This directory defines a two-layer style system.
 
+## Adoption Sequence
+
+1. Apply Layer 1 defaults across the repository.
+2. Apply the language-specific appendix for each language in use.
+3. If conflicts appear, resolve with Layer 2 language-specific guidance.
+
 ## Layer 1: Cross-Language Baseline
 
 - [Coding Style Baseline](coding-style-baseline.md)

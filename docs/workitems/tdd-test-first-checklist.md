@@ -2,6 +2,16 @@
 
 Use this checklist before writing implementation code.
 
+## When To Use
+
+- Use once per behavior slice during IMPLEMENTATION stage.
+- Re-run for each acceptance criterion slice, not as a one-time checklist.
+
+Expected output per slice:
+- failing test evidence (Red)
+- passing test evidence (Green)
+- brief refactor note (if any)
+
 ## 1) Pick the Smallest Behavior Slice
 
 - [ ] Select one user flow step from PRD.

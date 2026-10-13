@@ -2,6 +2,12 @@
 
 Copy this block for each criterion before implementation.
 
+## Usage Notes
+
+- Create one copy per acceptance criterion or behavior slice.
+- Keep scenarios black-box and observable.
+- Complete the Red-Green-Refactor log immediately after execution.
+
 ```md
 ## Test Case: <short behavior title>
 

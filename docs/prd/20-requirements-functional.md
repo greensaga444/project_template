@@ -1,5 +1,11 @@
 # Functional Requirements
 
+## Writing Rules
+
+- Each requirement must be atomic, testable, and user-visible.
+- Priority values should use a small consistent set: High, Medium, Low.
+- Dependencies must reference existing requirement IDs only.
+
 ## Requirement Table
 
 | ID | Requirement | Priority | Rationale | Depends On |

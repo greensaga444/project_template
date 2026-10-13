@@ -2,6 +2,11 @@
 
 Use these defaults unless a project section overrides them.
 
+## Tool Selection Rule
+
+- If multiple tools are listed, pick one formatter and one linter per language and keep them consistent across local and CI runs.
+- Record the chosen toolchain in project docs so contributors use the same checks.
+
 ## JavaScript and TypeScript
 
 - Formatter: Prettier

@@ -2,6 +2,13 @@
 
 Use this file as a project-ready template for user journey definitions.
 
+## Authoring Sequence
+
+1. Define one flow outcome and primary actor.
+2. Link the flow to at least one functional requirement and acceptance criterion.
+3. Write main path steps with observable results for each step.
+4. Add at least one alternate or error path with observable behavior.
+
 ## Completion Rules
 
 - Each High-priority functional requirement must be covered by at least one flow.

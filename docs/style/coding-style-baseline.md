@@ -31,3 +31,10 @@ These rules apply to all languages.
 - No dead code or commented-out code blocks.
 - No broad lint/type suppressions without rationale.
 - Handle errors explicitly; no silent failures.
+
+## Pull Request Checklist
+
+- Formatting applied.
+- Linting and tests pass locally.
+- New or changed behavior has test coverage.
+- Public API changes include docs and migration notes when needed.

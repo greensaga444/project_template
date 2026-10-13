@@ -1,5 +1,11 @@
 # Scope and Goals
 
+## Writing Rules
+
+- Keep goals measurable and outcome-oriented.
+- Keep out-of-scope explicit to avoid roadmap drift.
+- Record hard constraints early so requirement tradeoffs are visible.
+
 ## Business Goals
 
 - BG-001: TBD

@@ -4,6 +4,12 @@
 > Fill it in once at project start (typically from a PRD via `init`) to define the architecture, final target, roadmap, and milestones.
 > Each roadmap item is later implemented on its own branch using `status.md`.
 
+## Quick Use
+
+1. On `main` or `master`, run `init` to define Final Target, Architecture, Roadmap, and Milestones.
+2. Do not start roadmap execution until `Status: DEFINED`.
+3. For each roadmap item, start a branch and hand off to `docs/status.md`.
+
 ## Init Status
 
 Status: TEMPLATE

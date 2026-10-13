@@ -2,6 +2,12 @@
 
 This file is the executive summary of the product requirements.
 
+## How To Maintain This File
+
+- Keep this file concise and summary-oriented.
+- Put detailed definitions in owning section files.
+- Update links here whenever section files are renamed or reorganized.
+
 ## Product Summary
 
 - Product Name: TBD

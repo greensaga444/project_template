@@ -2,6 +2,16 @@
 
 Use this when you want one model to generate tests and another to implement code.
 
+## When To Use
+
+- Use for medium/high-risk slices where test intent must be tightly preserved.
+- Use when you want strict separation between test-authoring and implementation.
+
+## When Not To Use
+
+- Skip for tiny, low-risk changes where a single-model Red-Green-Refactor loop is faster.
+- Skip when handoff overhead is higher than implementation complexity.
+
 ## Goal
 
 - Keep responsibilities separate.

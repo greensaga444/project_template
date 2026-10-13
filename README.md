@@ -2,12 +2,20 @@
 
 A lightweight, stage-based workflow for shipping one work item per branch.
 
+## Quick Start Paths
+
+Use the path that matches your current state:
+
+1. New project: fill [docs/project.md](docs/project.md), set `Status: DEFINED`, then start branch work.
+2. Existing project: copy template, run `init`, then confirm and finalize project definition.
+3. Active branch work item: use [docs/status.md](docs/status.md) and move stage-by-stage.
+
 ## Core Files
 
 | File | Scope | Purpose |
 | --- | --- | --- |
-| `docs/project.md` | Whole codebase | One-time project definition: target, architecture, roadmap, milestones |
-| `docs/status.md` | Single branch / work item | Day-to-day execution through INIT/PLAN/IMPLEMENTATION/VERIFICATION/DELIVERY |
+| [docs/project.md](docs/project.md) | Whole codebase | One-time project definition: target, architecture, roadmap, milestones |
+| [docs/status.md](docs/status.md) | Single branch / work item | Day-to-day execution through INIT/PLAN/IMPLEMENTATION/VERIFICATION/DELIVERY |
 
 Works for web, desktop, mobile, CLI, libraries, backend services, and embedded projects.
 
@@ -15,8 +23,8 @@ Works for web, desktop, mobile, CLI, libraries, backend services, and embedded p
 
 | Path | Purpose |
 | --- | --- |
-| `docs/prd/` | Product requirements source files (single or multi-file PRDs) |
-| `docs/style/` | Two-layer coding style system (baseline + language appendices) |
+| [docs/prd/](docs/prd/) | Product requirements source files (single or multi-file PRDs) |
+| [docs/style/](docs/style/) | Two-layer coding style system (baseline + language appendices) |
 
 ---
 
@@ -65,7 +73,7 @@ If status is `TEMPLATE`, run `init` and complete project definition first.
    - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
    - Quick rule: choose FULL if any of these are true: unresolved design unknowns, migration/external API risk, or multi-component changes; otherwise choose LIGHT.
 4. Move forward with `goto next stage` (guarded by exit criteria).
-  - Optional non-interactive mode: `run auto` to execute all remaining stages and delivery in one pass.
+   - Optional non-interactive mode: `run auto` to execute all remaining stages and delivery in one pass.
 5. After IMPLEMENTATION and VERIFICATION are complete, run Delivery:
    - Update docs (`docs/project.md`, other docs, `README.md`) as needed.
    - Commit delivery updates.

@@ -1,5 +1,11 @@
 # Copilot Instructions
 
+## Execution Order
+
+1. Read [docs/status.md](../docs/status.md) first for branch work.
+2. Read [docs/project.md](../docs/project.md) for main/master roadmap or project definition updates.
+3. Use [docs/prd/00-index.md](../docs/prd/00-index.md) as the PRD entrypoint.
+
 ## Response Style
 
 - Be concise.

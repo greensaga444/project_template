@@ -2,6 +2,12 @@
 
 Map requirements to measurable checks.
 
+## Writing Rules
+
+- Use Given/When/Then format for functional behavior checks.
+- Keep each criterion observable and verifiable by one clear method.
+- Ensure every High-priority requirement has at least one acceptance criterion.
+
 ## Functional Mapping
 
 | Requirement ID | Acceptance Criteria | Verification Type |

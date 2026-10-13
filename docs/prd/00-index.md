@@ -2,6 +2,13 @@
 
 Use this folder for PRD source documents.
 
+## Practical Flow
+
+1. Start with [Master PRD](01-master-prd.md) for summary context.
+2. Fill scope/goals and requirements before writing detailed user flows.
+3. Map every requirement to measurable acceptance criteria.
+4. Track unresolved items in [Open Questions](90-open-questions.md) until closed.
+
 ## Current Version
 
 - Version: v0.1
