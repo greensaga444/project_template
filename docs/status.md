@@ -199,14 +199,15 @@ Precondition: IMPLEMENTATION and VERIFICATION are already complete.
 Flow:
 
 1. Update delivery documents as needed: `project.md` progress (Roadmap/Milestones), related docs, and `README.md`.
-2. Commit implementation changes and delivery updates together.
+2. Commit implementation changes and delivery updates together, but do not stage or commit `status.md`.
 3. Apply branch policy:
    - Main Branch Protected = yes (therefore Pull Request Required = yes): run `open pr` (confirm, then push and open/update PR to main). One PR per branch only.
    - Main Branch Protected = no (therefore Pull Request Required = no): skip `open pr`, push the delivery commit directly to `main`.
 4. Merge/land per policy.
-5. `finish` — switch to main and delete the branch.
+5. Reset `status.md` locally to init state for the next item (same reset as `goto init`) and keep it uncommitted.
+6. `finish` — switch to main and delete the branch.
 
-Delivery done definition: delivery updates are committed and landed per policy (merged or pushed to `main`), roadmap/milestones are updated, and branch cleanup is complete.
+Delivery done definition: delivery updates (excluding `status.md`) are committed and landed per policy (merged or pushed to `main`), roadmap/milestones are updated, `status.md` is reset locally, and branch cleanup is complete.
 
 ---
 
@@ -245,6 +246,7 @@ Delivery done definition: delivery updates are committed and landed per policy (
 - [ ] Docs/README updated
 - [ ] Delivery commit + push completed
 - [ ] PR opened/updated (if required)
+- [ ] status.md reset locally (not committed)
 
 ---
 
@@ -277,8 +279,9 @@ Rules:
 7. On `open pr` (when required), ensure delivery docs are updated before push/PR.
 8. On `report`, use `project.md` only on main/master; otherwise report from this file.
 9. If you need manual rework navigation, `goto plan|implementation|verification` is allowed; record a one-line reason in Next Action. These specific-stage commands change stage only (no auto-start).
-10. On `finish`, complete branch cleanup only after delivery updates are landed.
-11. On `run auto`, do not ask follow-up questions: use deterministic defaults, execute all remaining stages and delivery, and stop only on hard blockers with a concise failure report.
+10. Never commit `status.md`; it is a local tracker for the current item only.
+11. On `finish`, complete branch cleanup only after delivery updates are landed and `status.md` is reset locally.
+12. On `run auto`, do not ask follow-up questions: on a non-main branch, use deterministic defaults to finish this file's current work item through delivery, excluding `status.md` from commits and resetting it locally at the end, and stop only on hard blockers with a concise failure report; on `main`/`master`, do not run from this file and use `project.md` to start the next roadmap item instead.
 
 Efficiency (keep credit/token spend low):
 
@@ -302,11 +305,11 @@ goto next stage   (advances along the current Track only when current-stage Exit
 
 run ci   (VERIFICATION: detect a CI config and run it locally until green; if none exists, run the project's build + test instead)
 
-run auto   (non-interactive end-to-end runner for the current branch: execute all remaining stages from the current stage through DELIVERY using defaults, run tests/format/lint/local CI as required, update delivery docs, commit, push, and open/update PR only when required by policy; stop on first blocker and report exact failure + next manual action)
+run auto   (non-interactive end-to-end runner for a work branch: finish this current work item from the current stage through DELIVERY using defaults, run tests/format/lint/local CI as required, update delivery docs, commit and push all required changes except `status.md`, reset `status.md` locally, and open/update PR only when required by policy; if currently on `main`/`master`, use `project.md` run auto to start the next roadmap item)
 
-open pr   (after VERIFICATION done: for Main Branch Protected = yes, ensure delivery document updates + commit are complete, then confirm PR title/description, push branch, and open/update the branch PR to main; one PR per branch; requires CI green if project.md sets CI Required = yes)
+open pr   (after VERIFICATION done: for Main Branch Protected = yes, ensure delivery document updates + commit are complete (excluding `status.md`), then confirm PR title/description, push branch, and open/update the branch PR to main; one PR per branch; requires CI green if project.md sets CI Required = yes)
 
-finish   (switch to main and delete the current branch; if PR is skipped, first ensure delivery document updates + commit + push are complete)
+finish   (switch to main and delete the current branch; if PR is skipped, first ensure delivery document updates + commit + push are complete (excluding `status.md`) and `status.md` has been reset locally)
 
 Advanced (optional):
 

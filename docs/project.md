@@ -217,11 +217,15 @@ Rules:
 11. On `report`, check the current branch first: if branch is `main` or `master`, summarize progress from this file; otherwise do not use this file and report from `status.md`.
 12. Keep the project README aligned with the Final Target: on `init` write it toward the whole project's intended final state, and update it whenever a milestone finishes.
 13. Before Delivery, complete IMPLEMENTATION and VERIFICATION in `status.md`.
-14. Delivery is post-verification only: update Roadmap/Milestones and relevant docs/README, then commit.
-15. If Main Branch Protected = yes (therefore Pull Request Required = yes), open or update the branch PR (never create a second PR for the same branch).
-16. If Main Branch Protected = no (therefore Pull Request Required = no), skip PR creation and push the delivery commit directly to `main`.
-17. On `finish`, clean up the completed branch; if PR was skipped, ensure delivery docs update + commit + push are complete first.
-18. On `run auto`, execute branch flow non-interactively from the current stage in `status.md` through delivery and landing to `main` by policy (merge via PR when required, direct push when not required), then run cleanup.
+14. Delivery is post-verification only: update Roadmap/Milestones and relevant docs/README, then commit required delivery/code changes (excluding `status.md`).
+15. Never commit `status.md`; it is a local tracker for the current work item.
+16. If Main Branch Protected = yes (therefore Pull Request Required = yes), open or update the branch PR (never create a second PR for the same branch).
+17. If Main Branch Protected = no (therefore Pull Request Required = no), skip PR creation and push the delivery commit directly to `main`.
+18. On `finish`, clean up the completed branch only after delivery is landed and `status.md` is reset locally.
+19. On `run auto`, detect the current branch first:
+  - On `main`/`master`: pick the next Roadmap item (respecting dependencies), start its work branch, then finish that item end-to-end through delivery, landing, and cleanup.
+  - On any non-main branch: finish the current work item from the current stage in `status.md` through delivery, landing, and cleanup.
+20. On `run all auto`, process roadmap items one by one by repeatedly running `run auto` for the next eligible item until no eligible TODO items remain; for each item, exclude `status.md` from commits, reset it locally after landing, and stop immediately on the first blocker with the blocked item plus next manual action.
 
 ---
 
@@ -239,8 +243,10 @@ add roadmap item   (add a row with a one-line Definition of Done; check it doesn
 
 start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else LIGHT)
 
-run auto   (non-interactive full work-item runner after `start`: drive remaining stages in `status.md`, run verification gates, perform delivery, land changes to `main` by policy, then execute `finish` cleanup)
+run auto   (branch-aware non-interactive runner: on `main`/`master`, start the next eligible Roadmap item and complete it end-to-end; on a work branch, complete the current item from its current stage through delivery, landing, and `finish` cleanup; never commit `status.md`, and reset `status.md` locally after landing)
+
+run all auto   (on `main`/`master`, execute `run auto` repeatedly to complete all eligible roadmap items one by one; for each item exclude `status.md` from commits and reset it locally after landing; respect dependencies and stop on the first blocker with a concise failure report)
 
 report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 
-finish   (after a work item is delivered: clean up the completed branch; if PR was skipped, ensure Roadmap/Milestones + docs/README update, commit, and push are done before cleanup)
+finish   (after a work item is delivered: reset `status.md` locally and clean up the completed branch; if PR was skipped, ensure Roadmap/Milestones + docs/README update, commit, and push are done before cleanup, excluding `status.md`)
