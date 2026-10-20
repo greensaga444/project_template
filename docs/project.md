@@ -255,6 +255,8 @@ run all auto   (on `main`/`master`, execute `run auto` repeatedly to complete al
 
 optimize <short-name>   (create `chore/optimize-<short-name>` branch, execute [docs/workitems/optimize-code.md](workitems/optimize-code.md), use its Standard Output Template for reporting, and complete delivery using this file's Delivery Policy)
 
+improve testing <short-name>   (create `chore/test-<short-name>` branch, execute [docs/workitems/improve-testing.md](workitems/improve-testing.md), and complete delivery using this file's Delivery Policy)
+
 report   (check branch first: on main/master, re-read this file and summarize roadmap progress; on other branches, report from `status.md`)
 
 finish   (after a work item is delivered: reset `status.md` locally and clean up the completed branch; if PR was skipped, ensure Roadmap/Milestones + docs/README update, commit, and push are done before cleanup, excluding `status.md`)
