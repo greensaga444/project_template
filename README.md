@@ -67,7 +67,7 @@ If status is `TEMPLATE`, run `init` and complete project definition first.
 ## Per-Branch Workflow
 
 1. Create branch: `<type>/<short-name>` (`feature|fix|chore|docs`).
-2. Prepare `docs/status.md`, then run `goto init`.
+2. Reset `docs/status.md` to template state (`git --no-pager restore --staged --worktree docs/status.md`), then run `goto init`.
 3. Choose track:
    - FULL: INIT -> PLAN -> IMPLEMENTATION -> VERIFICATION
    - LIGHT: INIT -> IMPLEMENTATION -> VERIFICATION
@@ -97,10 +97,11 @@ Gate: do not start branch work while status is `TEMPLATE`.
 ### 1) Start One Work Item (new branch)
 
 1. Create branch: `<type>/<short-name>`.
-2. Open `docs/status.md`.
-3. Run `goto init`.
-4. Fill Work Item Name + Description.
-5. Confirm Definition of Done and overlap check.
+2. Reset `docs/status.md`: `git --no-pager restore --staged --worktree docs/status.md`.
+3. Open `docs/status.md`.
+4. Run `goto init`.
+5. Fill Work Item Name + Description.
+6. Confirm Definition of Done and overlap check.
 
 ### 2) Pick Track During INIT
 

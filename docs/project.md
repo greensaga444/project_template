@@ -152,9 +152,9 @@ Constraints / Non-Functional Requirements:
 
 ## Roadmap / Todo List
 
-> Each item becomes a work branch. On start, copy the status template into your workflow directory (`<workflow-dir>/status.md`, usually `docs/status.md`),
-> set the work item, choose a Track (FULL for risky/unknown items, LIGHT for
-> small/clear ones), reset items to TBD, and begin at the INIT stage.
+> Each item becomes a work branch. On start, reset the status file in your workflow directory (`<workflow-dir>/status.md`, usually `docs/status.md`) to template state
+> (or copy from the template if missing), then set the work item, choose a Track
+> (FULL for risky/unknown items, LIGHT for small/clear ones), and begin at the INIT stage.
 >
 > Slicing rules to avoid redundant work:
 > - Define each item by a distinct, user-visible outcome, captured in its one-line Definition of Done.
@@ -247,7 +247,7 @@ show roadmap
 
 add roadmap item   (add a row with a one-line Definition of Done; check it doesn't overlap an existing item)
 
-start <type>/<name> [full|light]   (copy the status template to `<workflow-dir>/status.md` (usually `docs/status.md`), reset to INIT stage, set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else LIGHT)
+start <type>/<name> [full|light]   (reset `<workflow-dir>/status.md` (usually `docs/status.md`) to template state, or copy from the template if missing; then reset to INIT stage and set the Track; type = feature/fix/chore/docs; Track defaults to the Roadmap row, else LIGHT)
 
 run auto   (branch-aware non-interactive runner: on `main`/`master`, start the next eligible Roadmap item and complete it end-to-end; on a work branch, complete the current item from its current stage through delivery, landing, and `finish` cleanup; never commit `status.md`, and reset `status.md` locally after landing)
 
