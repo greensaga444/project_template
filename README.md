@@ -25,6 +25,7 @@ Works for web, desktop, mobile, CLI, libraries, backend services, and embedded p
 | --- | --- |
 | [docs/prd/](docs/prd/) | Product requirements source files (single or multi-file PRDs) |
 | [docs/style/](docs/style/) | Two-layer coding style system (baseline + language appendices) |
+| [docs/workitems/](docs/workitems/) | Reusable workflow playbooks and templates (optimization/testing/TDD support) |
 
 ---
 
@@ -148,6 +149,24 @@ Done definition: updates landed per policy, docs updated, branch cleaned.
 - `goto plan|implementation|verification`: explicit navigation; no guard; no auto-start.
 - Manual stage change must record a one-line reason in `Next Action`.
 - Only `goto init` resets checklist items.
+
+## Project-Level Command Set
+
+Commands defined in [docs/project.md](docs/project.md):
+
+- `init`
+- `show final target`
+- `show architecture`
+- `show roadmap`
+- `add roadmap item`
+- `start <type>/<name> [full|light]`
+- `run auto`
+- `run all auto`
+- `update readme` (execute [docs/workitems/update-readme.md](docs/workitems/update-readme.md) to run an architect-level repository documentation audit and regenerate onboarding-ready README content from source-of-truth artifacts)
+- `optimize <short-name>`
+- `improve testing <short-name>`
+- `report`
+- `finish`
 
 ---
 

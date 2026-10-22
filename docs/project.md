@@ -232,6 +232,7 @@ Rules:
   - On `main`/`master`: pick the next Roadmap item (respecting dependencies), start its work branch, then finish that item end-to-end through delivery, landing, and cleanup.
   - On any non-main branch: finish the current work item from the current stage in `status.md` through delivery, landing, and cleanup.
 20. On `run all auto`, process roadmap items one by one by repeatedly running `run auto` for the next eligible item until no eligible TODO items remain; for each item, exclude `status.md` from commits, reset it locally after landing, and stop immediately on the first blocker with the blocked item plus next manual action.
+21. On `update readme`, execute [docs/workitems/update-readme.md](workitems/update-readme.md) as an architect-level documentation audit: use repository artifacts as source of truth, detect workflows/setup/APIs/CLI/env/config automatically, and refresh `README.md` in onboarding-ready form.
 
 ---
 
@@ -252,6 +253,8 @@ start <type>/<name> [full|light]   (reset `<workflow-dir>/status.md` (usually `d
 run auto   (branch-aware non-interactive runner: on `main`/`master`, start the next eligible Roadmap item and complete it end-to-end; on a work branch, complete the current item from its current stage through delivery, landing, and `finish` cleanup; never commit `status.md`, and reset `status.md` locally after landing)
 
 run all auto   (on `main`/`master`, execute `run auto` repeatedly to complete all eligible roadmap items one by one; for each item exclude `status.md` from commits and reset it locally after landing; respect dependencies and stop on the first blocker with a concise failure report)
+
+update readme   (execute [docs/workitems/update-readme.md](workitems/update-readme.md) to run a full repository documentation audit and regenerate `README.md` from code/config/build/CI source-of-truth evidence)
 
 optimize <short-name>   (create `chore/optimize-<short-name>` branch, execute [docs/workitems/optimize-code.md](workitems/optimize-code.md), use its Standard Output Template for reporting, and complete delivery using this file's Delivery Policy)
 
