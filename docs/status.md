@@ -6,10 +6,17 @@
 
 ## Quick Use
 
-1. Fill Current Work Item and keep Track = LIGHT by default.
-2. Advance with `goto next stage` and satisfy each stage Exit Criteria.
-3. Use the test documents during IMPLEMENTATION and run tests/format/lint/CI in VERIFICATION.
-4. Never commit `status.md`; reset it locally after delivery.
+1. On every new branch, reset `status.md` to this template state, then run `goto init`.
+2. Fill Current Work Item and keep Track = LIGHT by default.
+3. Advance with `goto next stage` and satisfy each stage Exit Criteria.
+4. Use the test documents during IMPLEMENTATION and run tests/format/lint/CI in VERIFICATION.
+5. Never commit `status.md`; keep it local-only and reset it after delivery.
+
+Recommended reset command when a branch is created:
+
+```bash
+git --no-pager restore --staged --worktree docs/status.md
+```
 
 ## Project
 
