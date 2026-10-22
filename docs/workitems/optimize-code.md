@@ -23,6 +23,7 @@ Use this workflow when you want to run a dedicated optimization pass with delive
 
 - Pick a clear target (module, flow, or bottleneck).
 - State the non-goals explicitly to avoid scope drift.
+- Record a baseline for the chosen scope (tests, key metrics, or other relevant signals).
 
 ### 2) Preserve Behavior
 
@@ -33,27 +34,28 @@ Use this workflow when you want to run a dedicated optimization pass with delive
 
 - Remove duplication and simplify control flow.
 - Improve naming, structure, and maintainability.
-- Apply performance improvements only where measurable or clearly justified.
-- Remove redundant code.
-- Eliminate duplicated logic.
-- Minimize code size where possible without reducing readability.
-- Consolidate similar methods into reusable utilities.
+- Apply performance improvements only when validated by before/after evidence, or document why direct measurement is not feasible.
 - Remove dead code and unused variables.
-- Simplify nested `if/else` statements.
-- Follow clean code principles (clear naming, single responsibility, readable flow).
-- Preserve all existing functionality.
-- Do not introduce unnecessary abstractions.
+- Minimize code size only when readability is preserved.
+- Reuse existing patterns/utilities and avoid unnecessary abstractions.
+
+Classify optimization scope as one of:
+
+- `cleanup`: readability and maintainability improvements.
+- `perf`: runtime, memory, or build-size improvements with measurable impact.
 
 ### 4) Verify
 
 - Run targeted tests for touched areas.
 - Run lint/format checks if configured.
 - Confirm no regressions in expected outputs.
+- Record the exact verification commands and results.
 
 ### 5) Deliver
 
 - Update related docs when behavior, API, or usage changes.
 - Follow Delivery Policy from [project.md](../project.md) for commit/PR/merge rules.
+- For high-risk changes, include a rollback or fallback note.
 
 ## Completion Definition
 
@@ -66,7 +68,7 @@ Optimization is done when:
 
 ## Full Refactoring Review Requirement
 
-When running this workflow as a **full refactoring review**, perform a project-wide audit and implementation pass aligned with the checklist above.
+Run this mode only when explicitly requested as a **full refactoring review**. In this mode, perform a project-wide audit and implementation pass aligned with the checklist above.
 
 ### Required Deliverables
 
@@ -131,9 +133,9 @@ Use this response structure when reporting a full refactoring review:
 - Risk reduction:
 
 ## Verification
-- Tests run:
-- Lint/format run:
-- Result:
+- Tests run (exact command):
+- Lint/format run (exact command):
+- Result (pass/fail):
 - Regressions found:
 
 ## Final Notes
