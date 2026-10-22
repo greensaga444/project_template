@@ -28,6 +28,7 @@ Act as a senior SDET and software architect.
 
 - Pick a concrete target area (module, flow, or feature slice).
 - State expected behavior to protect and non-goals to avoid scope drift.
+- Capture a baseline for the target area (current test pass state, coverage, and known flaky tests if any).
 
 ### 2) Check Existing Tests
 
@@ -43,6 +44,9 @@ Act as a senior SDET and software architect.
   8. Configuration Risks
 - Identify missing behavior cases (happy path, validation, boundary, error path, idempotency if relevant).
 - Identify weak assertions coupled to implementation details.
+- Use concrete risk checks where relevant:
+  - Security: auth/authz negatives, input validation, data exposure boundaries.
+  - Performance: timeout behavior, retry behavior, large input handling.
 
 ### 3) Improve Tests
 
@@ -50,17 +54,20 @@ Act as a senior SDET and software architect.
 - Strengthen assertions to validate outputs/state rather than internals.
 - Remove flaky patterns and stabilize fixtures/data setup.
 - Keep naming behavior-focused and readable.
+- Avoid overfitting tests to implementation details (for example, unnecessary private-call assertions or brittle snapshot-only checks).
 
 ### 4) Verify
 
 - Run targeted tests for touched areas.
 - Run broader related suite to detect regressions.
 - Run lint/format checks for test files if configured.
+- Record exact verification commands and pass/fail results.
 
 ### 5) Deliver
 
 - Update related docs when test strategy or usage guidance changes.
 - Follow Delivery Policy from [project.md](../project.md) for commit/PR/merge rules.
+- For high-impact or ambiguous behavior findings, include rollback/fallback guidance in delivery notes.
 
 ## Completion Definition
 
@@ -83,6 +90,7 @@ For each missing test, provide:
 - Example test code
 
 Prioritize findings by business impact.
+Use this prioritization rubric: user impact × likelihood × detectability gap.
 
 ## Standard Output Template (Use for `improve testing <short-name>`)
 
@@ -122,8 +130,8 @@ Use this response structure when reporting results:
 2. <Next>
 
 ## Verification
-- Tests run:
-- Lint/format run:
-- Result:
+- Tests run (exact command):
+- Lint/format run (exact command):
+- Result (pass/fail):
 - Regressions found:
 ```
