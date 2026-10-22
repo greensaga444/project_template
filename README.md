@@ -162,8 +162,8 @@ Commands defined in [docs/project.md](docs/project.md):
 - `start <type>/<name> [full|light]`
 - `run auto`
 - `run all auto`
-- `update readme` (execute [docs/workitems/update-readme.md](docs/workitems/update-readme.md) to run an architect-level repository documentation audit and regenerate onboarding-ready README content from source-of-truth artifacts)
-- `optimize <short-name>`
+- `update readme`
+- `sync prd`
 - `improve testing <short-name>`
 - `report`
 - `finish`
