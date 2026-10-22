@@ -14,9 +14,9 @@ Act as a senior software architect and technical writer.
 ## Required Sequence
 
 1. Identify the README scope to refresh (template workflow, product docs, or both).
-2. Scan the repository and collect current structure/command sources.
+2. Scan repository evidence relevant to that scope and collect current structure/command sources.
 3. Update README sections that are stale or missing.
-4. Verify links and command descriptions against source documents.
+4. Verify links and command descriptions against source documents using explicit checks.
 5. Follow the Delivery Policy in [project.md](../project.md) before landing.
 
 ## Scope Rule
@@ -29,12 +29,12 @@ Act as a senior software architect and technical writer.
 
 ## Repository Audit Requirements
 
-Perform a documentation audit of the entire repository and:
+Perform a documentation audit for the selected refresh scope and:
 
 - detect major workflows automatically;
 - infer setup instructions from build scripts, package manager files, Dockerfiles, CI pipelines, and configuration files;
 - extract public APIs, CLI commands, environment variables, and configuration options;
-- regenerate README content as a professional onboarding document.
+- refresh README content as a professional onboarding document without unverified claims.
 
 ## Update Checklist
 
@@ -42,6 +42,8 @@ Perform a documentation audit of the entire repository and:
 
 - Confirm which README file to update (`README.md` by default).
 - Record intended sections to update (commands, structure, workflow, examples).
+- Capture a baseline snapshot of the current README sections being updated.
+- Record non-goals for this pass to prevent scope drift.
 
 ### 2) Scan Current Repository State
 
@@ -51,6 +53,7 @@ Perform a documentation audit of the entire repository and:
 - Detect build, test, lint, and release workflows from automation/config files.
 - Extract setup and runtime requirements from package/dependency manifests and scripts.
 - Inventory user-facing commands, APIs, environment variables, and config knobs.
+- If evidence is missing or ambiguous, mark the item explicitly instead of inferring behavior.
 
 ### 3) Apply README Updates
 
@@ -58,12 +61,14 @@ Perform a documentation audit of the entire repository and:
 - Remove stale or misleading statements.
 - Keep command and workflow descriptions concise and consistent.
 - Preserve existing valid content not related to the refresh target.
+- Keep every added statement traceable to repository evidence.
 
 ### 4) Verify
 
 - Check all updated links resolve.
 - Check command descriptions match canonical command docs.
 - Re-read only touched sections for consistency and duplication.
+- Record exact verification commands/manual checks and pass/fail outcomes.
 
 ### 5) Deliver
 
@@ -78,7 +83,7 @@ README refresh is done when:
 - Command and workflow descriptions align with canonical docs.
 - All updated links are valid.
 - Setup instructions are inferred from real project automation/configuration assets.
-- Public APIs, CLI commands, env vars, and config options are documented (or explicitly marked none found).
+- In-scope APIs, CLI commands, env vars, and config options are documented (or explicitly marked none found).
 - Delivery is completed per policy.
 
 ## Standard Output Template (Use for `update readme`)
@@ -117,14 +122,15 @@ Use this response structure when reporting a README refresh:
    - Source alignment:
 
 ## Verification
-- Link checks:
-- Command consistency checks:
-- Result:
+- Link checks (exact command/manual check):
+- Command consistency checks (exact command/manual check):
+- Result (pass/fail):
 
 ## 4) Suggested Improvements
 - Improvement 1:
 - Improvement 2:
 
 ## Final Notes
+- Assumptions/unknowns:
 - Follow-ups (if any):
 ```
