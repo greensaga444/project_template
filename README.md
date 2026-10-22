@@ -1,10 +1,10 @@
 # Project Workflow Template
 
-A lightweight, stage-based workflow for shipping one work item per branch.
+This template gives you a practical, stage-based way to ship one work item per branch without losing delivery discipline.
 
 ## Quick Start Paths
 
-Use the path that matches your current state:
+Pick the path that matches where you are right now:
 
 1. New project: fill [docs/project.md](docs/project.md), set `Status: DEFINED`, then start branch work.
 2. Existing project: copy template, run `init`, then confirm and finalize project definition.
@@ -17,7 +17,7 @@ Use the path that matches your current state:
 | [docs/project.md](docs/project.md) | Whole codebase | One-time project definition: target, architecture, roadmap, milestones |
 | [docs/status.md](docs/status.md) | Single branch / work item | Day-to-day execution through INIT/PLAN/IMPLEMENTATION/VERIFICATION/DELIVERY |
 
-Works for web, desktop, mobile, CLI, libraries, backend services, and embedded projects.
+You can use this for web, desktop, mobile, CLI, libraries/SDKs, backend services, and embedded projects.
 
 ## Optional Documentation Packs
 
@@ -34,13 +34,13 @@ Works for web, desktop, mobile, CLI, libraries, backend services, and embedded p
 ### New Project
 
 1. Fill `docs/project.md` (Final Target, Architecture, Roadmap, Milestones).
-2. Set `Status: DEFINED` only after content is reviewed and approved.
+2. Set `Status: DEFINED` only after the content is reviewed and approved.
 
 ### Existing Project
 
 1. Copy this template into the repo.
 2. Run `init` to scan languages/frameworks/layout and draft fields.
-3. Fill Final Target and Roadmap manually (the scan cannot infer business goals).
+3. Fill Final Target and Roadmap manually (the scan can’t infer business goals).
 
 ---
 
@@ -60,8 +60,8 @@ else
 fi
 ```
 
-Branch-work prerequisite: before starting any work-item branch flow, the resolved project file (`docs/project.md`, `.workflow/project.md`, or root `project.md`) must be `Status: DEFINED`.
-If status is `TEMPLATE`, run `init` and complete project definition first.
+Before you start branch work, make sure the resolved project file (`docs/project.md`, `.workflow/project.md`, or root `project.md`) is `Status: DEFINED`.
+If it’s still `TEMPLATE`, run `init` and finish project definition first.
 
 ---
 
@@ -139,7 +139,7 @@ Use `run auto` when you want unattended execution from the current stage through
 3. Land by policy: protected main uses `open pr` (one PR per branch); unprotected main pushes directly to `main`.
 4. Run `finish` for branch cleanup.
 
-Done definition: updates landed per policy, docs updated, branch cleaned.
+Done means: updates landed per policy, docs refreshed, and branch cleaned up.
 
 ---
 
@@ -164,6 +164,7 @@ Commands defined in [docs/project.md](docs/project.md):
 - `run all auto`
 - `update readme`
 - `sync prd`
+- `optimize <short-name>`
 - `improve testing <short-name>`
 - `report`
 - `finish`
@@ -185,5 +186,5 @@ On FULL track, PLAN output goes to `<workflow-dir>/workitems/<name>.md`.
 - In target projects, keep canonical workflow files under `docs/` (or `.workflow/` for large repos).
 - Keep product requirements in `docs/prd/` (indexed by `docs/prd/00-index.md`).
 - Keep coding standards in `docs/style/` (Layer 1 baseline + Layer 2 language appendices).
-- This README describes workflow mechanics; target-project README should describe that project's product.
+- This README describes workflow mechanics; a target-project README should describe that project’s product.
 - See `docs/project.md` and `docs/status.md` for complete command behavior and AI rules.

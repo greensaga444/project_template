@@ -26,6 +26,8 @@ Act as a senior software architect and technical writer.
 - Keep wording aligned with canonical sources in [docs/project.md](../project.md) and [docs/status.md](../status.md).
 - Use source code and executable project artifacts as the source of truth.
 - Treat existing README content as potentially stale; keep only statements verified from repository evidence.
+- In the refreshed README, prefer a conversational and onboarding-friendly tone (clear, direct, human-readable) while preserving technical accuracy.
+- Conversational-tone requirement applies to `README.md` only. Keep technical workflow/spec documents (`project.md`, `status.md`, `docs/prd/*.md`, `docs/workitems/*.md`) precise and formal.
 
 ## Repository Audit Requirements
 
@@ -60,6 +62,7 @@ Perform a documentation audit for the selected refresh scope and:
 - Add missing sections required by current repo structure.
 - Remove stale or misleading statements.
 - Keep command and workflow descriptions concise and consistent.
+- Rewrite rigid or overly formal README phrasing into a more conversational style when it improves clarity.
 - Preserve existing valid content not related to the refresh target.
 - Keep every added statement traceable to repository evidence.
 
