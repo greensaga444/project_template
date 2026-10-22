@@ -110,7 +110,7 @@ Define requirements/MVP and break them into implementable tasks.  (FULL track on
 
 Output:
 
-<workflow-dir>/workitems/<name>.md — "Spec" and "Tasks" sections (`<workflow-dir>` is usually `docs/`; in this template repo it is also `docs/`)
+<workflow-dir>/artifacts/<name>.md — "Spec" and "Tasks" sections (`<workflow-dir>` is usually `docs/`; in this template repo it is also `docs/`)
 
 Allowed:
 
@@ -268,7 +268,7 @@ Delivery done definition: delivery updates (excluding `status.md`) are committed
 
 TBD
 
-> Keep this to 3-4 lines. Detail belongs in `<workflow-dir>/workitems/<name>.md` (`docs/` in target projects and this template repo), not here.
+> Keep this to 3-4 lines. Detail belongs in `<workflow-dir>/artifacts/<name>.md` (`docs/` in target projects and this template repo), not here.
 
 ---
 
@@ -287,7 +287,7 @@ Rules:
 1. Follow Current Stage; default to LIGHT track.
 2. Use FULL only when planning is necessary (unknowns/risk).
 3. Prefer `goto next stage` as the normal progression command.
-4. Keep Current Task to 3-4 lines; put details in `<workflow-dir>/workitems/<name>.md`.
+4. Keep Current Task to 3-4 lines; put details in `<workflow-dir>/artifacts/<name>.md`.
 5. On `goto init`, reset fields to TBD and uncheck checklist items.
 6. During VERIFICATION, run tests, format/lint (if defined), and local CI when a CI config exists.
 7. On `open pr` (when required), ensure delivery docs are updated before push/PR.

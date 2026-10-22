@@ -83,7 +83,8 @@ docs/
   status.md
   prd/
   style/
-  workitems/<name>.md
+  workitems/
+  artifacts/<name>.md
 ```
 
 Recommended layout inside a target project:
@@ -94,7 +95,8 @@ docs/
   status.md             (per-task workflow, one copy per branch)
   prd/                  (product requirements source files)
   style/                (coding style baseline + language appendices)
-  workitems/<name>.md   (FULL track: PLAN output — Spec + Tasks — in one file)
+  workitems/            (reusable workflow playbooks/templates)
+  artifacts/<name>.md   (execution artifacts, including FULL-track PLAN output)
 <source>/               (application/source code)
 ```
 

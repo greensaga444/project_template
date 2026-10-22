@@ -26,6 +26,7 @@ You can use this for web, desktop, mobile, CLI, libraries/SDKs, backend services
 | [docs/prd/](docs/prd/) | Product requirements source files (single or multi-file PRDs) |
 | [docs/style/](docs/style/) | Two-layer coding style system (baseline + language appendices) |
 | [docs/workitems/](docs/workitems/) | Reusable workflow playbooks and templates (optimization/testing/TDD support) |
+| [docs/artifacts/](docs/artifacts/) | Execution artifacts generated during PLAN/IMPLEMENTATION/VERIFICATION |
 
 ---
 
@@ -176,7 +177,7 @@ Commands defined in [docs/project.md](docs/project.md):
 - Small/new projects: keep workflow files in `docs/`.
 - Large existing repos: use `.workflow/` to avoid conflicts.
 
-On FULL track, PLAN output goes to `<workflow-dir>/workitems/<name>.md`.
+On FULL track, PLAN output goes to `<workflow-dir>/artifacts/<name>.md`.
 
 ---
 
